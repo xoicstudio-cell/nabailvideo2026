@@ -1,0 +1,269 @@
+{
+  "items": [
+    {
+      "type": "short",
+      "title": "D&R Energy",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "1:32",
+      "src": "videos/short-dr-energy.mp4",
+      "poster": "thumbs/short-dr-energy.webp"
+    },
+    {
+      "type": "long",
+      "title": "Wild Planet",
+      "desc": "",
+      "tags": [
+        "Long-form"
+      ],
+      "dur": "1:02",
+      "src": "videos/long-wild-planet.mp4",
+      "poster": "thumbs/long-wild-planet.webp"
+    },
+    {
+      "type": "motion",
+      "title": "Base44",
+      "desc": "",
+      "tags": [
+        "Motion Graphics",
+        "SaaS"
+      ],
+      "dur": "0:30",
+      "src": "videos/motion-base44.mp4",
+      "poster": "thumbs/motion-base44.webp"
+    },
+    {
+      "type": "social",
+      "title": "Trendtrack",
+      "desc": "",
+      "tags": [
+        "Social Feed",
+        "Ecommerce SaaS"
+      ],
+      "images": [
+        "img/social-trendtrack-frame-109.webp",
+        "img/social-trendtrack-frame-110.webp",
+        "img/social-trendtrack-frame-111.webp"
+      ]
+    },
+    {
+      "type": "short",
+      "title": "Spin the Wheel",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "1:26",
+      "src": "videos/short-spin-the-wheel.mp4",
+      "poster": "thumbs/short-spin-the-wheel.webp"
+    },
+    {
+      "type": "long",
+      "title": "E-Sport Malang dengan Generasi Emas",
+      "desc": "Documentary film — 1st winner, Universitas Widya Karya Malang.",
+      "tags": [
+        "Long-form",
+        "Documentary"
+      ],
+      "dur": "9:54",
+      "src": "videos/long-e-sport-malang.mp4",
+      "poster": "thumbs/long-e-sport-malang.webp"
+    },
+    {
+      "type": "short",
+      "title": "SLC Solution",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "1:57",
+      "src": "videos/short-slc-solution.mp4",
+      "poster": "thumbs/short-slc-solution.webp"
+    },
+    {
+      "type": "motion",
+      "title": "Firecrawl",
+      "desc": "",
+      "tags": [
+        "Motion Graphics",
+        "SaaS"
+      ],
+      "dur": "0:20",
+      "src": "videos/motion-firecrawl.mp4",
+      "poster": "thumbs/motion-firecrawl.webp"
+    },
+    {
+      "type": "short",
+      "title": "One System for the Home, Car and Heating",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "2:02",
+      "src": "videos/short-one-system.mp4",
+      "poster": "thumbs/short-one-system.webp"
+    },
+    {
+      "type": "long",
+      "title": "Lebih dari Selesai",
+      "desc": "Short film — 2nd place, SIFEST 2024.",
+      "tags": [
+        "Long-form",
+        "Short film"
+      ],
+      "dur": "7:05",
+      "src": "videos/long-lebih-dari-selesai.mp4",
+      "poster": "thumbs/long-lebih-dari-selesai.webp"
+    },
+    {
+      "type": "social",
+      "title": "Elafine",
+      "desc": "",
+      "tags": [
+        "Social Feed",
+        "Product demo studio"
+      ],
+      "images": [
+        "img/social-elafine-frame-106.webp",
+        "img/social-elafine-frame-107.webp",
+        "img/social-elafine-frame-108.webp"
+      ]
+    },
+    {
+      "type": "short",
+      "title": "Panasun",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "1:25",
+      "src": "videos/short-panasun.mp4",
+      "poster": "thumbs/short-panasun.webp"
+    },
+    {
+      "type": "motion",
+      "title": "Lumen",
+      "desc": "",
+      "tags": [
+        "Motion Graphics",
+        "SaaS"
+      ],
+      "dur": "0:29",
+      "src": "videos/motion-lumen.mp4",
+      "poster": "thumbs/motion-lumen.webp"
+    },
+    {
+      "type": "short",
+      "title": "What You Need to Watch Out For, and Why We're Different",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "0:51",
+      "src": "videos/short-what-you-need-to-watch-out-for.mp4",
+      "poster": "thumbs/short-what-you-need-to-watch-out-for.webp"
+    },
+    {
+      "type": "long",
+      "title": "Warna Pengorbanan",
+      "desc": "Short film — East Java provincial participant.",
+      "tags": [
+        "Long-form",
+        "Short film"
+      ],
+      "dur": "6:59",
+      "src": "videos/long-warna-pengorbanan.mp4",
+      "poster": "thumbs/long-warna-pengorbanan.webp"
+    },
+    {
+      "type": "short",
+      "title": "Grouped Resources",
+      "desc": "",
+      "tags": [
+        "Short-form Ad"
+      ],
+      "dur": "0:48",
+      "src": "videos/short-grouped-resources.mp4",
+      "poster": "thumbs/short-grouped-resources.webp"
+    },
+    {
+      "type": "short",
+      "title": "Spin the Wheel — Install Overview",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "1:26",
+      "src": "videos/short-spin-the-wheel-install-overview.mp4",
+      "poster": "thumbs/short-spin-the-wheel-install-overview.webp"
+    },
+    {
+      "type": "short",
+      "title": "Who's Older",
+      "desc": "",
+      "tags": [
+        "Short-form",
+        "Street interview"
+      ],
+      "dur": "0:50",
+      "src": "videos/short-who-s-older.mp4",
+      "poster": "thumbs/short-who-s-older.webp"
+    },
+    {
+      "type": "short",
+      "title": "Silverqueen",
+      "desc": "",
+      "tags": [
+        "Short-form",
+        "Brand story"
+      ],
+      "dur": "1:34",
+      "src": "videos/short-silverqueen.mp4",
+      "poster": "thumbs/short-silverqueen.webp"
+    },
+    {
+      "type": "short",
+      "title": "Talking-head Short",
+      "desc": "",
+      "tags": [
+        "Short-form",
+        "Talking-head"
+      ],
+      "dur": "0:59",
+      "src": "videos/short-trial-video.mp4",
+      "poster": "thumbs/short-trial-video.webp"
+    },
+    {
+      "type": "short",
+      "title": "Solar Short",
+      "desc": "",
+      "tags": [
+        "Short-form Ad",
+        "Solar"
+      ],
+      "dur": "0:21",
+      "src": "videos/short-solar-short.mp4",
+      "poster": "thumbs/short-solar-short.webp"
+    },
+    {
+      "type": "short",
+      "title": "Not Really Extrovert",
+      "desc": "",
+      "tags": [
+        "Short-form"
+      ],
+      "dur": "0:44",
+      "src": "videos/short-not-really-extrovert.mp4",
+      "poster": "thumbs/short-not-really-extrovert.webp"
+    }
+  ]
+}

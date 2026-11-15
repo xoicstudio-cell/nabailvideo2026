@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin — naba'ilsae</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050608;--panel:#0b0c10;--panel2:#12141b;--line:#23262f;--line2:#3a3e4b;--text:#f3f5fa;--muted:#a3a8b4;--blue:#2b59ff;--blue-soft:#9fb4ff;--ok:#7ee2b0;--bad:#ff8f8f;
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--blue-soft);outline-offset:2px}
+.mono{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line2);font-size:13px;font-weight:500;transition:.15s;white-space:nowrap}
+.btn:hover{border-color:#fff}
+.btn.pri{background:var(--blue);border-color:var(--blue)}
+.btn.pri:hover{background:#4a72ff;border-color:#4a72ff}
+.btn.pri:disabled{opacity:.45;cursor:default}
+.btn.danger{color:var(--bad);border-color:#5a2f35}
+.btn.danger:hover{background:#3a1c20;border-color:var(--bad)}
+.btn.sm{min-height:32px;padding:0 12px;font-size:12px}
+
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 20px;background:rgba(5,6,8,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{font-weight:600;font-size:18px;letter-spacing:-.05em}
+.logo i{font-style:normal;color:#4a72ff}
+.logo span{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-left:8px}
+header .sp{flex:1}
+#state{font-size:12px;color:var(--muted)}
+#state.dirty{color:#ffd27a}
+
+/* login */
+.login{max-width:420px;margin:12vh auto 0;padding:28px;background:var(--panel);border:1px solid var(--line);border-radius:20px}
+.login h1{font-size:26px;font-weight:500;letter-spacing:-.04em;margin:0 0 6px}
+.login p{color:var(--muted);margin:0 0 20px;font-size:13px}
+.field{display:block;margin-bottom:14px}
+.field>span{display:block;margin-bottom:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.field small{display:block;margin-top:5px;color:var(--muted);font-size:12px}
+input[type=text],input[type=password],input[type=url],select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line2);background:var(--bg)}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-offset:1px}
+.check{display:flex;align-items:center;gap:8px;margin:4px 0 18px;color:var(--muted);font-size:13px}
+.err{color:var(--bad);font-size:13px;margin-top:12px;min-height:18px}
+
+/* app */
+.tabs{display:flex;gap:6px;padding:16px 20px 0}
+.tabs button{min-height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line2);color:var(--muted);font-size:13px}
+.tabs button[aria-selected=true]{background:#fff;color:#0b0c10;border-color:#fff}
+.pane{padding:16px 20px 80px}
+.split{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}
+.box h2{font-size:15px;font-weight:500;margin:0 0 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:6px;max-height:72vh;overflow:auto}
+.item{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px;border-radius:12px;border:1px solid transparent;cursor:pointer}
+.item:hover{background:var(--panel2)}
+.item.on{background:var(--panel2);border-color:var(--blue)}
+.item.over{border-color:var(--blue-soft);border-style:dashed}
+.item img,.item .noimg{width:54px;height:40px;object-fit:cover;border-radius:8px;background:#1a2a78}
+.item b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .grip{color:var(--line2);font-size:16px;cursor:grab;padding:0 4px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:12px}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;min-height:110px;padding:16px;border:1px dashed var(--line2);border-radius:14px;color:var(--muted);cursor:pointer;transition:.15s}
+.drop:hover,.drop.over{border-color:var(--blue-soft);color:#fff;background:rgba(43,89,255,.08)}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.media{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:12px}
+.media video,.media img.poster{max-height:220px;max-width:100%;border-radius:12px;background:#000;border:1px solid var(--line)}
+.tiles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tile{position:relative}
+.tile img{height:110px;border-radius:10px;border:1px solid var(--line);display:block}
+.tile button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;background:rgba(5,6,8,.85);border:1px solid var(--line2);font-size:13px;line-height:1}
+.meta{font-size:12px;color:var(--muted);margin-bottom:12px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:8px;padding-top:14px;border-top:1px solid var(--line)}
+.empty{color:var(--muted);padding:40px 10px;text-align:center}
+fieldset{border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 14px}
+legend{padding:0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-soft)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);max-width:min(560px,92vw);padding:12px 18px;border-radius:14px;background:#fff;color:#0b0c10;font-size:13px;font-weight:500;box-shadow:0 14px 50px rgba(0,0,0,.5);z-index:20}
+#toast.bad{background:#3a1c20;color:#ffd7d7;border:1px solid var(--bad)}
+#toast.ok{background:#12301f;color:#c9f5dd;border:1px solid var(--ok)}
+progress{width:100%;height:6px;margin-top:8px;accent-color:var(--blue)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">naba<i>’</i>ilsae<span>Admin</span></div>
+  <a class="btn sm" href="../" target="_blank" rel="noopener" id="viewSite" hidden>View site ↗</a>
+  <div class="sp"></div>
+  <span id="state" hidden>No changes</span>
+  <button class="btn pri" id="publish" hidden disabled>Publish</button>
+  <button class="btn sm" id="logout" hidden>Sign out</button>
+</header>
+
+<form class="login" id="login">
+  <h1>Sign in</h1>
+  <p>Paste your GitHub token for this site's repository. It is only stored in this browser.</p>
+  <label class="field"><span>GitHub token</span><input type="password" id="token" autocomplete="off" required></label>
+  <label class="check"><input type="checkbox" id="remember" checked> Remember on this device</label>
+  <button class="btn pri" id="loginBtn" style="width:100%">Sign in</button>
+  <div class="err" id="loginErr" role="alert"></div>
+</form>
+
+<main id="app" hidden>
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="works">Works</button>
+    <button role="tab" aria-selected="false" data-tab="site">Site settings</button>
+  </div>
+
+  <section class="pane" id="pane-works">
+    <div class="split">
+      <div class="box">
+        <h2><span>Works <span class="mono" id="count"></span></span><button class="btn sm pri" id="add">+ Add work</button></h2>
+        <ul class="list" id="list"></ul>
+        <p class="meta" style="margin:10px 0 0">Drag to reorder. The order here is the order on the site.</p>
+      </div>
+      <div class="box" id="editor"><div class="empty">Select a work to edit, or add a new one.</div></div>
+    </div>
+  </section>
+
+  <section class="pane" id="pane-site" hidden><div class="box" id="siteForm" style="max-width:860px"></div></section>
+</main>
+
+<div id="toast" hidden role="status"></div>
+
+<script>
+/* ---- repository this admin writes to ---- */
+const OWNER = "xoicstudio-cell", REPO = "nabailvideo2026", BRANCH = "main";
+const API = `https://api.github.com/repos/${OWNER}/${REPO}`;
+const MAX_VIDEO = 25 * 1024 * 1024;   // Cloudflare Pages limit per file
+const TYPES = { short:"Short-form Ad", long:"Long-form", motion:"Motion Graphics", social:"Social Feed" };
+
+const $ = id => document.getElementById(id);
+const esc = t => String(t == null ? "" : t).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const slug = t => String(t || "work").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "work";
+const rand = () => Math.random().toString(36).slice(2, 6);
+const store = (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} };
+const read = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const mb = n => (n / 1048576).toFixed(1) + " MB";
+const fmt = s => { s = Math.round(s || 0); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+
+let token = "", data = { works:[], site:{} }, saved = {}, pending = {}, removed = new Set(), sel = -1;
+const shown = {};   // previews of files published in this session (the live site needs ~1 min to catch up)
+
+function toast(text, kind){ const t = $("toast"); t.textContent = text; t.className = kind || ""; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, kind === "bad" ? 9000 : 4500); }
+
+async function gh(path, opts = {}){
+  const r = await fetch(API + path, { method:opts.method || "GET",
+    headers:{ Authorization:"Bearer " + token, Accept:opts.raw ? "application/vnd.github.raw+json" : "application/vnd.github+json", "X-GitHub-Api-Version":"2022-11-28", "Content-Type":"application/json" },
+    body:opts.body ? JSON.stringify(opts.body) : undefined });
+  if (!r.ok){ let m = ""; try { m = (await r.json()).message || ""; } catch (e) {} const err = new Error(m || r.statusText); err.status = r.status; throw err; }
+  return opts.raw ? r.text() : r.json();
+}
+const explain = e => e.status === 401 ? "That token was not accepted. Check it and try again."
+  : e.status === 403 ? "This token cannot write to the repository. It needs “Contents: Read and write”."
+  : e.status === 404 ? `Repository ${OWNER}/${REPO} not found for this token.`
+  : e.status === 409 || e.status === 422 ? "The site changed somewhere else. Reload this page and try again."
+  : "Something went wrong: " + (e.message || "network error");
+async function readJSON(path, fallback){ try { return JSON.parse(await gh(`/contents/${path}?ref=${BRANCH}`, { raw:true })); } catch (e) { if (e.status === 404) return fallback; throw e; } }
+
+/* ---- sign in ---- */
+async function signIn(t, remember){
+  token = t.trim(); $("loginBtn").disabled = true; $("loginErr").textContent = "";
+  try {
+    const repo = await gh("");
+    if (repo.permissions && !repo.permissions.push) throw Object.assign(new Error(), { status:403 });
+    const [w, s] = await Promise.all([readJSON("content/works.json", { items:[] }), readJSON("content/site.json", {})]);
+    data.works = w.items || []; data.site = s || {};
+    for (const k of ["contact","hero","testimonial","pricing"]) data.site[k] = data.site[k] || {};
+    data.site.stats = (data.site.stats || []).concat(Array.from({ length:4 }, () => ({ value:"", suffix:"", label:"" }))).slice(0, 4);
+    store("nv_token", remember ? token : null); snapshot();
+    $("login").hidden = true; $("app").hidden = false;
+    ["state","publish","logout","viewSite"].forEach(id => $(id).hidden = false);
+    renderList(); renderSite(); refresh();
+  } catch (e) { token = ""; $("loginErr").textContent = explain(e); }
+  $("loginBtn").disabled = false;
+}
+$("login").addEventListener("submit", e => { e.preventDefault(); signIn($("token").value, $("remember").checked); });
+$("logout").addEventListener("click", () => { store("nv_token", null); location.reload(); });
+
+/* ---- change tracking ---- */
+const ser = () => ({ works:JSON.stringify({ items:data.works }, null, 2) + "\n", site:JSON.stringify(data.site, null, 2) + "\n" });
+const snapshot = () => { saved = ser(); };
+const used = () => new Set(data.works.flatMap(w => [w.src, w.poster].concat(w.images || [])).filter(p => p && !/^https?:/.test(p)));
+function changes(){ const s = ser(), u = used(); return (s.works !== saved.works) + (s.site !== saved.site) + Object.keys(pending).filter(p => u.has(p)).length; }
+function refresh(){
+  const n = changes(), st = $("state");
+  st.textContent = n ? `${n} unpublished change${n > 1 ? "s" : ""}` : "No changes"; st.classList.toggle("dirty", !!n);
+  $("publish").disabled = !n; $("count").textContent = `(${data.works.length})`;
+}
+addEventListener("beforeunload", e => { if (token && changes()){ e.preventDefault(); e.returnValue = ""; } });
+
+/* ---- files ---- */
+const src = p => !p ? "" : pending[p] ? pending[p].url : shown[p] ? shown[p] : /^https?:/.test(p) ? p : "../" + p;
+const fileToB64 = blob => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(",")[1]); fr.onerror = rej; fr.readAsDataURL(blob); });
+function drop(path){ if (!path || /^https?:/.test(path)) return; if (pending[path]){ URL.revokeObjectURL(pending[path].url); delete pending[path]; } else removed.add(path); }
+async function stash(path, blob){ pending[path] = { b64:await fileToB64(blob), url:URL.createObjectURL(blob), size:blob.size }; return path; }
+async function toWebp(source, maxW, q){
+  const w = source.videoWidth || source.width, h = source.videoHeight || source.height, k = Math.min(1, maxW / w);
+  const c = document.createElement("canvas"); c.width = Math.round(w * k); c.height = Math.round(h * k);
+  c.getContext("2d").drawImage(source, 0, 0, c.width, c.height);
+  return new Promise(res => c.toBlob(res, "image/webp", q));
+}
+function grabFrame(file){
+  return new Promise(res => {
+    const v = document.createElement("video"); v.muted = true; v.playsInline = true; v.preload = "auto"; v.src = URL.createObjectURL(file);
+    const done = (dur, blob) => { URL.revokeObjectURL(v.src); res({ dur, blob }); };
+    const timer = setTimeout(() => done(v.duration || 0, null), 12000);
+    v.onloadedmetadata = () => { v.currentTime = Math.min(v.duration * .3, Math.max(0, v.duration - .1)); };
+    v.onseeked = async () => { clearTimeout(timer); let blob = null; try { blob = await toWebp(v, v.videoWidth > v.videoHeight ? 800 : 480, .76); } catch (e) {} done(v.duration, blob); };
+    v.onerror = () => { clearTimeout(timer); done(0, null); };
+  });
+}
+async function setVideo(w, file){
+  if (!/mp4$/i.test(file.name) && file.type !== "video/mp4") return toast("Use an MP4 file (H.264) so it plays in every browser.", "bad");
+  if (file.size > MAX_VIDEO) return toast(`This video is ${mb(file.size)}. The limit is 25 MB per file — compress it first (720p, lower bitrate).`, "bad");
+  toast("Reading video…");
+  const base = `${w.type}-${slug(w.title === "New work" ? file.name.replace(/\.[^.]+$/, "") : w.title)}-${rand()}`;
+  drop(w.src); w.src = await stash(`videos/${base}.mp4`, file);
+  const { dur, blob } = await grabFrame(file);
+  if (dur) w.dur = fmt(dur);
+  if (blob){ drop(w.poster); w.poster = await stash(`thumbs/${base}.webp`, blob); }
+  if (w.title === "New work") w.title = file.name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
+  toast(blob ? "Video added. Thumbnail and duration were set automatically." : "Video added. Add a thumbnail image below.", "ok");
+}
+async function imageBlob(file, maxW){ const bmp = await createImageBitmap(file); return toWebp(bmp, maxW, .85); }
+
+/* ---- works list ---- */
+function renderList(){
+  const el = $("list");
+  el.innerHTML = data.works.length ? data.works.map((w, i) => {
+    const c = w.poster || (w.images && w.images[0]);
+    return `<li class="item${i === sel ? " on" : ""}" draggable="true" data-i="${i}">${c ? `<img src="${esc(src(c))}" alt="">` : '<span class="noimg"></span>'}<span><b>${esc(w.title || "Untitled")}</b><span class="mono">${TYPES[w.type] || w.type}${w.dur ? " · " + esc(w.dur) : ""}</span></span><span class="grip" aria-hidden="true">⋮⋮</span></li>`;
+  }).join("") : '<li class="empty">No works yet.</li>';
+  let from = null;
+  el.querySelectorAll(".item").forEach(li => {
+    const i = +li.dataset.i;
+    li.addEventListener("click", () => { sel = i; renderList(); renderEditor(); });
+    li.addEventListener("dragstart", e => { from = i; e.dataTransfer.effectAllowed = "move"; });
+    li.addEventListener("dragover", e => { e.preventDefault(); li.classList.add("over"); });
+    li.addEventListener("dragleave", () => li.classList.remove("over"));
+    li.addEventListener("drop", e => { e.preventDefault(); if (from !== null && from !== i){ const cur = data.works[sel]; data.works.splice(i, 0, data.works.splice(from, 1)[0]); sel = data.works.indexOf(cur); renderList(); refresh(); } from = null; });
+  });
+}
+$("add").addEventListener("click", () => { data.works.unshift({ type:"short", title:"New work", desc:"", tags:[], dur:"", src:"", poster:"" }); sel = 0; renderList(); renderEditor(); refresh(); });
+
+/* ---- work editor ---- */
+const field = (k, label, val, hint, area) => `<label class="field"><span>${label}</span>${area ? `<textarea data-k="${k}">${esc(val)}</textarea>` : `<input type="text" data-k="${k}" value="${esc(val)}">`}${hint ? `<small>${hint}</small>` : ""}</label>`;
+const dropzone = (id, text, accept, multiple) => `<label class="drop" data-drop="${id}"><input type="file" data-file="${id}" accept="${accept}"${multiple ? " multiple" : ""}><b>${text}</b><span>Drop here or click to choose</span></label>`;
+function renderEditor(){
+  const el = $("editor"), w = data.works[sel];
+  if (!w){ el.innerHTML = '<div class="empty">Select a work to edit, or add a new one.</div>'; return; }
+  const isSocial = w.type === "social";
+  el.innerHTML = `<h2>Edit work</h2>
+    <div class="row"><label class="field"><span>Category</span><select data-k="type">${Object.keys(TYPES).map(t => `<option value="${t}"${t === w.type ? " selected" : ""}>${TYPES[t]}</option>`).join("")}</select></label>${field("title", "Title", w.title)}</div>
+    ${isSocial ? `<fieldset><legend>Images</legend><div class="tiles">${(w.images || []).map((p, n) => `<div class="tile"><img src="${esc(src(p))}" alt=""><button type="button" data-rm="${n}" aria-label="Remove image ${n + 1}">✕</button></div>`).join("")}</div>${dropzone("images", "Add images", "image/*", true)}</fieldset>`
+    : `<fieldset><legend>Video</legend>
+        ${w.src ? `<div class="media">${/^https?:/.test(w.src) ? "" : `<video src="${esc(src(w.src))}" controls preload="metadata"${w.poster ? ` poster="${esc(src(w.poster))}"` : ""}></video>`}${w.poster ? `<img class="poster" src="${esc(src(w.poster))}" alt="Thumbnail">` : ""}</div><p class="meta">${esc(w.src)}${pending[w.src] ? " · " + mb(pending[w.src].size) + " · not published yet" : ""}</p>` : ""}
+        <div class="row">${dropzone("video", w.src ? "Replace video" : "Upload video (MP4, max 25 MB)", "video/mp4", false)}${dropzone("poster", w.poster ? "Replace thumbnail" : "Upload thumbnail", "image/*", false)}</div>
+        <div class="row" style="margin-top:12px">${field("dur", "Duration", w.dur, "Filled automatically, e.g. 0:45")}${field("src", "Video file or link", w.src, "Or paste a YouTube / Vimeo link instead of uploading")}</div></fieldset>`}
+    ${field("desc", "Short description", w.desc, "One line. Optional.", true)}
+    ${field("tags", "Tags", (w.tags || []).join(", "), "Separate with commas, e.g. Short-form Ad, Solar")}
+    <div class="foot"><span id="delBox"><button type="button" class="btn danger sm" id="del">Delete work</button></span><span class="meta" style="margin:0;align-self:center">Changes go live after you press Publish.</span></div>`;
+
+  el.querySelectorAll("[data-k]").forEach(inp => inp.addEventListener(inp.tagName === "SELECT" ? "change" : "input", () => {
+    const k = inp.dataset.k;
+    if (k === "tags") w.tags = inp.value.split(",").map(s => s.trim()).filter(Boolean);
+    else if (k === "type"){
+      const was = w.type === "social", now = inp.value === "social"; w.type = inp.value;
+      if (now && !was){ drop(w.src); drop(w.poster); delete w.src; delete w.poster; delete w.dur; w.images = []; }
+      if (!now && was){ (w.images || []).forEach(drop); delete w.images; w.src = ""; w.poster = ""; w.dur = ""; }
+      renderEditor();
+    } else if (k === "src"){ if (inp.value !== w.src){ drop(w.src); w.src = inp.value.trim(); } }
+    else w[k] = inp.value;
+    renderList(); refresh();
+  }));
+  const onFiles = async (kind, files) => {
+    try {
+      if (kind === "video") await setVideo(w, files[0]);
+      if (kind === "poster"){ drop(w.poster); w.poster = await stash(`thumbs/${w.type}-${slug(w.title)}-${rand()}.webp`, await imageBlob(files[0], 960)); }
+      if (kind === "images"){ w.images = w.images || []; for (const f of files) w.images.push(await stash(`img/social-${slug(w.title)}-${rand()}.webp`, await imageBlob(f, 1600))); }
+    } catch (e) { toast("Could not read that file. Try another one.", "bad"); }
+    renderList(); renderEditor(); refresh();
+  };
+  el.querySelectorAll("input[data-file]").forEach(inp => inp.addEventListener("change", () => inp.files.length && onFiles(inp.dataset.file, [...inp.files])));
+  el.querySelectorAll("[data-drop]").forEach(z => {
+    z.addEventListener("dragover", e => { e.preventDefault(); z.classList.add("over"); });
+    z.addEventListener("dragleave", () => z.classList.remove("over"));
+    z.addEventListener("drop", e => { e.preventDefault(); z.classList.remove("over"); const fs = [...e.dataTransfer.files]; if (fs.length) onFiles(z.dataset.drop, fs); });
+  });
+  el.querySelectorAll("[data-rm]").forEach(b => b.addEventListener("click", () => { drop(w.images.splice(+b.dataset.rm, 1)[0]); renderList(); renderEditor(); refresh(); }));
+  $("del").addEventListener("click", () => {
+    $("delBox").innerHTML = '<button type="button" class="btn danger sm" id="delYes">Yes, delete</button> <button type="button" class="btn sm" id="delNo">Cancel</button>';
+    $("delNo").addEventListener("click", renderEditor);
+    $("delYes").addEventListener("click", () => { [w.src, w.poster].concat(w.images || []).forEach(drop); data.works.splice(sel, 1); sel = -1; renderList(); renderEditor(); refresh(); });
+  });
+}
+
+/* ---- site settings ---- */
+function renderSite(){
+  const s = data.site, f = (path, label, val, hint, area) => field(path, label, val, hint, area);
+  $("siteForm").innerHTML = `<h2>Site settings</h2>
+    <fieldset><legend>Contact (floating message button + footer)</legend><div class="row">
+      ${f("contact.whatsapp", "WhatsApp number", s.contact.whatsapp, "Digits only with country code, e.g. 6281234567890")}
+      ${f("contact.linkedin", "LinkedIn handle", s.contact.linkedin, "The part after linkedin.com/in/")}
+      ${f("contact.instagram", "Instagram username", s.contact.instagram, "Without @. Leave empty to hide Instagram.")}
+      ${f("contact.email", "Email", s.contact.email)}</div></fieldset>
+    <fieldset><legend>Hero</legend>${f("hero.intro", "Intro text beside your photo", s.hero.intro, "", true)}</fieldset>
+    <fieldset><legend>Testimonial</legend>${f("testimonial.quote", "Quote", s.testimonial.quote, "", true)}${f("testimonial.name", "Client name", s.testimonial.name)}</fieldset>
+    <fieldset><legend>Milestones</legend>${s.stats.map((x, i) => `<div class="row">${f(`stats.${i}.value`, `Number ${i + 1}`, x.value)}${f(`stats.${i}.suffix`, "Suffix", x.suffix, "e.g. + or %")}${f(`stats.${i}.label`, "Label", x.label)}</div>`).join("")}</fieldset>
+    <fieldset><legend>Pricing</legend><div class="row">
+      ${f("pricing.perVideo", "Per video", s.pricing.perVideo, "e.g. $120")}${f("pricing.retainer", "Monthly retainer", s.pricing.retainer, "e.g. $900")}${f("pricing.custom", "Custom plan", s.pricing.custom)}</div></fieldset>`;
+  $("siteForm").querySelectorAll("[data-k]").forEach(inp => inp.addEventListener("input", () => {
+    const keys = inp.dataset.k.split("."), last = keys.pop(); keys.reduce((o, k) => o[k], s)[last] = inp.value; refresh();
+  }));
+}
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
+  $("pane-works").hidden = b.dataset.tab !== "works"; $("pane-site").hidden = b.dataset.tab !== "site";
+}));
+
+/* ---- publish: one commit with every changed file ---- */
+$("publish").addEventListener("click", async () => {
+  const btn = $("publish"), s = ser(), u = used(), files = [];
+  if (s.works !== saved.works) files.push({ path:"content/works.json", content:s.works, encoding:"utf-8" });
+  if (s.site !== saved.site) files.push({ path:"content/site.json", content:s.site, encoding:"utf-8" });
+  Object.keys(pending).filter(p => u.has(p)).forEach(p => files.push({ path:p, content:pending[p].b64, encoding:"base64" }));
+  const dels = [...removed].filter(p => !u.has(p));
+  btn.disabled = true;
+  try {
+    const ref = await gh(`/git/ref/heads/${BRANCH}`), base = ref.object.sha, baseCommit = await gh(`/git/commits/${base}`);
+    const tree = [];
+    for (let i = 0; i < files.length; i++){
+      btn.textContent = `Uploading ${i + 1}/${files.length}…`;
+      const blob = await gh("/git/blobs", { method:"POST", body:{ content:files[i].content, encoding:files[i].encoding } });
+      tree.push({ path:files[i].path, mode:"100644", type:"blob", sha:blob.sha });
+    }
+    dels.forEach(p => tree.push({ path:p, mode:"100644", type:"blob", sha:null }));
+    btn.textContent = "Saving…";
+    const t = await gh("/git/trees", { method:"POST", body:{ base_tree:baseCommit.tree.sha, tree } });
+    const c = await gh("/git/commits", { method:"POST", body:{ message:"Update content via admin", tree:t.sha, parents:[base] } });
+    await gh(`/git/refs/heads/${BRANCH}`, { method:"PATCH", body:{ sha:c.sha } });
+    Object.keys(pending).forEach(p => { shown[p] = pending[p].url; }); pending = {}; removed = new Set(); snapshot();
+    toast("Published. The live site updates in about a minute.", "ok");
+  } catch (e) { toast(explain(e), "bad"); }
+  btn.textContent = "Publish"; refresh();
+});
+
+const remembered = read("nv_token");
+if (remembered){ $("token").value = remembered; signIn(remembered, true); }
+</script>
+</body>
+</html>

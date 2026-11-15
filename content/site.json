@@ -1,0 +1,42 @@
+{
+  "contact": {
+    "whatsapp": "6288905370830",
+    "linkedin": "nabailsaewr",
+    "instagram": "",
+    "email": "nabailsae@xoic.space"
+  },
+  "hero": {
+    "intro": "Video editor and motion graphic designer with 2+ years of editing for international creators, brands and agencies — fully remote."
+  },
+  "testimonial": {
+    "quote": "The video is perfect! I’m really happy with the result, and the delivery time was excellent.",
+    "name": "Jerome Choppin"
+  },
+  "stats": [
+    {
+      "value": "2",
+      "suffix": "+",
+      "label": "Years of professional editing"
+    },
+    {
+      "value": "<0.5",
+      "suffix": "%",
+      "label": "Revision rate on freelance work"
+    },
+    {
+      "value": "4",
+      "suffix": "",
+      "label": "Industries: fintech, AI, media, tech"
+    },
+    {
+      "value": "20",
+      "suffix": "+",
+      "label": "Videos in this portfolio"
+    }
+  ],
+  "pricing": {
+    "perVideo": "[YOUR PRICE]",
+    "retainer": "[YOUR PRICE]",
+    "custom": "Project Based"
+  }
+}
